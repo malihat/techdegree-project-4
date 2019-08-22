@@ -10,6 +10,7 @@ $('#btn__reset').on('click', () => {
 });
 
 // Calls the handleInteraction function when the user types the letter.
-$('button.key').on('click', e => {
+$('button.key').on('click keypress', e => {
     game.handleInteraction(e.target);
 });
+

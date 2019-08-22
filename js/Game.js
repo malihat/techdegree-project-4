@@ -48,9 +48,9 @@ class Game {
 
         // Compares the length of visible letters and hidden letters
         if ( visibleLetters > 0 && hiddenLetters == 0) {
-            return 'true'
+            return true
         } else {
-            return 'false';
+            return false;
         }
     }
 
@@ -91,7 +91,7 @@ class Game {
     handleInteraction(button) { 
         $(button).attr('disabled', true);
         // If letter does not match then the removeLife is called and the letter on keyboard will get 'wrong' class
-        if ( this.activePhrases.checkLetter($(button).text()) == 'false' ) {
+        if ( !(this.activePhrases.checkLetter($(button).text()) ) ) {
             $(button).attr('class', 'wrong');
             this.removeLife();
         } else {
@@ -101,7 +101,7 @@ class Game {
             this.checkForWin();
         }
         // If checkForWin returns true then the gamover function is called 
-        if (this.checkForWin() == 'true') {
+        if (this.checkForWin() ) {
             this.gameOver(true);
         }
     }

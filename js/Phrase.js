@@ -25,9 +25,9 @@
     checkLetter(letter) {
         let letters = this.phrase.split('');
         if (letters.includes(letter)) {
-            return 'true';
+            return true;
         } else {
-            return 'false';
+            return false;
         }
     }
 
