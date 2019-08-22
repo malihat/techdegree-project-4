@@ -29,13 +29,7 @@ class Game {
         const randomNum = Math.floor(Math.random() * this.phrases.length) ;
         return this.phrases[randomNum];
     }
-
-    // lengthOfPhrase() {
-    //     let phrase = this.getRandomPhrase().phrase.replace(/ /g, '')
-    //     // console.log(phrase,  phrase.replace(/ /g, '').length)
-    //     return phrase.length;
-    // }
-    
+   
     // Initiates the game 
     startGame() {
         // Hides the start display
@@ -49,29 +43,11 @@ class Game {
 
     // Checks if the player has guessed the phrase.
     checkForWin() {
-        // let phraseVisible = [];
-        // $('button.key').on('click', () => {
-            // phraseVisible = $( "#phrase ul li.letter" ).filter(function(  ) {    
-            //     return $(this).attr('class') == 'hide letter'
-            // })
-            // console.log(phraseVisible.attr('class') ,'phraseVisible class : ', phraseVisible.length);  //if length of phraseVisible is > 0
-            // if ( phraseVisible.length <= 0) {  
-            // console.log('Show class:', $( "#phrase ul li.letter" ).attr('class', 'show').length);
-            // // phraseVisible.attr('class') !== 'hide letter'
-            //     console.log('true');
-            //     return 'true';
-            // } 
-            // else {
-            //     console.log('false');
-            //     return 'false';
-            // }
-        // });
+        let hiddenLetters = $('.letter').length;
+        let visibleLetters = $('.show').length; 
 
-        
-        let sumLetter = document.getElementsByClassName('letter').length;
-        let shownLetters = document.getElementsByClassName('show').length;
-
-        if ( shownLetters > 0 &&  sumLetter == 0) {
+        // Compares the length of visible letters and hidden letters
+        if ( visibleLetters > 0 && hiddenLetters == 0) {
             return 'true'
         } else {
             return 'false';
@@ -89,7 +65,7 @@ class Game {
         }  
     }
 
-    // Resets the display 
+    // Resets the display
     resetGame() {
         $('#phrase ul li').remove();
         $('#qwerty div button').attr('disabled', false);
@@ -97,7 +73,7 @@ class Game {
         $('li.tries img').attr('src', 'images/liveHeart.png');
     }
 
-
+    // Changes the display if the player wins or loses
     gameOver(gameWon) {
         $('#overlay').css('display', 'block');
         if (gameWon) {
@@ -109,19 +85,22 @@ class Game {
             $('#overlay h1').text('You Lose :(');
             this.resetGame()
         }
-
     }
 
+    // Receives the letter and checks if the letter has matched or not
     handleInteraction(button) { 
         $(button).attr('disabled', true);
+        // If letter does not match then the removeLife is called and the letter on keyboard will get 'wrong' class
         if ( this.activePhrases.checkLetter($(button).text()) == 'false' ) {
             $(button).attr('class', 'wrong');
             this.removeLife();
         } else {
+            // If letter is matched then the checkForWin is called and the letter on keyboard will get 'chosen' class
             this.activePhrases.showMatchedLetter($(button).text());
             $(button).attr('class', 'chosen');
             this.checkForWin();
         }
+        // If checkForWin returns true then the gamover function is called 
         if (this.checkForWin() == 'true') {
             this.gameOver(true);
         }

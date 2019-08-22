@@ -3,7 +3,7 @@
  * Phrase.js */
 
 
-//  Phrase Class with a property phrase that holds the one phrase in it.
+//  Phrase Class with a property phrase that holds phrase in it.
  class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
