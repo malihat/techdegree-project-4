@@ -2,14 +2,14 @@
  * Project 4 - OOP Game App
  * app.js */
 
-// const game = new Game();
-//  game.startGame(); 
-//  console.log(`Active Phrase - phrase: ${game.activePhrases.phrase}`); 
-
+// Starts the game for the first time
 let game;
 $('#btn__reset').on('click', () => {
     game = new Game();
     game.startGame();
-    
 });
 
+// Calls the handleInteraction function when the user types the letter.
+$('button.key').on('click', e => {
+    game.handleInteraction(e.target);
+});
